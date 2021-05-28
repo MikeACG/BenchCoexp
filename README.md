@@ -8,11 +8,11 @@ The algorithm (`Rsrc/benchCoexp.r`) takes as inputs a gene expression matrix (ge
 The algorithm steps are as follows:
 1. Apply the preprocessing function (if any) to the expression matrix. For example, we could use this if we need to discretize the gene vectors prior to a Mutual Information-based association measure calculation.
 2. Calculate the co-association (co-expression) matrix of all possible combinations of two genes in the data using the association function provided.
-3. For each gene $i$, rank the associations of $i$ with every other possible gene $j$.
+3. For each gene `i`, rank the associations of `i` with every other possible gene `j`.
 4. Compute the mutual rank (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2762411/) matrix. This will allow for different measures of associations to be comparable independently of their scale.
 5. Conduct the benchmarking process (implemented with parallel computing). The algorithm used is the same as used in for example: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1700-9 "evaluation of co-expression networks", methods description.
 
-The final return value is a 3-dimensional array with $s$ slices. Each slice is a confusion matrix for a particular operation point (Mutual Rank value). At each operation point, this value is used as a threshold to predict if wether or not a pair of genes is cofunctional. Once all pairs of genes are predicted, the prediction is checked against the "Ground Truth" given by the terms data. This array of confusion matrices can be used in downstream analyses to determine the performance of the {association measure-expression dataset-terms dataset} combination in a similar fashion to what is done when evaluating a classifier in a Machine Learning binary classification task.
+The final return value is a 3-dimensional array with `s` slices. Each slice is a confusion matrix for a particular operation point (Mutual Rank value). At each operation point, this value is used as a threshold to predict if wether or not a pair of genes is cofunctional. Once all pairs of genes are predicted, the prediction is checked against the "Ground Truth" given by the terms data. This array of confusion matrices can be used in downstream analyses to determine the performance of the {association measure-expression dataset-terms dataset} combination in a similar fashion to what is done when evaluating a classifier in a Machine Learning binary classification task.
 
 The file `example.r` walks through the usage of the program in detail. The final result (which in this case evaluates the measure of association using Area Under the Recieving Operator Curve) should look something like this:
 
