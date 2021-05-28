@@ -2,7 +2,7 @@
 # setwd()
 
 # make sure these libraries are installed
-lapply(c("Rcpp", "RcppParallel", "bigmemory", "pracma"), require, character.only = TRUE)
+lapply(c("Rcpp", "RcppParallel", "bigmemory", "data.table", "pracma"), require, character.only = TRUE)
 
 # load source code
 invisible(sapply(list.files("Rsrc/", full.names = TRUE), source))
